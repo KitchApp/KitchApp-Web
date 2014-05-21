@@ -23,3 +23,56 @@ function buy_list_help($path, $arg) {
       return $output;
   }
 }
+
+/**
+* Implements hook_menu().
+*/
+funct
+ion buy_list_menu() {
+$items = array();
+$items['admin/config/content/buy_list'] = array(
+'title' => t('Configuration of Buy List'),
+'description' => t('Configure the Buy List module'),
+'page callback' => 'drupal_get_form',
+'page arguments' => array('buy_list_admin'),
+'access arguments' => array('administer Buy List settings'),
+'type' => MENU_NORMAL_ITEM,
+);
+ 
+return $items;
+}
+
+/**
+* Implements hook_permission().
+*/
+
+function buy_list_permission() {
+return array(
+'administer Buy List settings' => array(
+'title' => t('Administer Buy List configurations'),
+'restrict access' => true,
+)
+);
+}
+
+/**
+* Formulario de configuración
+*
+* @return array The form structure.
+*/
+function buy_list_admin() {
+$form = array();
+ 
+// Algo que configurar
+$form['buy_list_something'] = array(
+'#type' => 'textfield',
+'#title' => t('Configurable Field 1'),
+'#default_value' => variable_get(‘buy_list_something’, ""),
+'#size' => 60,
+'#maxlength' => 250,
+'#description' => t("Configurable Field 1"),
+'#required' => TRUE,
+);
+ 
+return system_settings_form($form);
+}
