@@ -78,6 +78,21 @@ function buy_list_extract_products($node) {
 	if ($node->type == 'lista') {
 		$id_list = $node->nid['0']['value'];
 		$id_list_products = db_fetch_array(db_query("SELECT field_productos_compra_value FROM {drupalis_field_data_field_productos_compra} WHERE entity_id = %d", $id_list));
-		
+		$products=array();
+		foreach($id_list_products as $key => $id_product){}
+			$query = db_fetch_array(db_query("SELECT field_nombre_producto_compra_value FROM {drupalis_field_data_field_nombre_producto_compra} WHERE entity_id = %d", $id_product));
+			$nombre = $query[field_nombre_producto_compra_value];
+			$query = db_fetch_array(db_query("SELECT field_cantidad_producto_compra_value FROM {drupalis_field_data_field_cantidad_producto_compra} WHERE entity_id = %d", $id_product));
+			$cantidad = $query[field_cantidad_producto_compra_value];
+			$query = db_fetch_array(db_query("SELECT name FROM {drupalis_taxonomy_term_data} WHERE tid IN (SELECT field_unidades_producto_compra_tid FROM {drupalis_field_data_field_unidades_producto_compra} WHERE entity_id = %d", $id_product)));
+			$unidad = $query[name];
+			$query = db_fetch_array(db_query("SELECT name FROM {drupalis_taxonomy_term_data} WHERE tid IN (SELECT field_categoria_producto_compra_tid FROM {drupalis_field_data_field_categoria_producto_compra} WHERE entity_id = %d", $id_product)));
+			$categoria = $query[name];
+			$products[$key] = array("nombre" => $nombre,
+									"cantidad" => $cantidad,
+									"unidad" => $unidad,
+									"categoria" => $categoria,
+ 									),
 	}
+	return $products;
 }
