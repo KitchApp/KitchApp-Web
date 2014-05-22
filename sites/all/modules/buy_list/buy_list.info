@@ -1,5 +1,10 @@
 name = Buy List
 description = A module that inserts into the pantry all products of a list
 core = 7.x
-package = "BuyList"
+package = BuyList
+php = 5.4
 version = "1.0"
+
+dependencies[]= ctools
+
+configure = admin/config/content/buy_list
