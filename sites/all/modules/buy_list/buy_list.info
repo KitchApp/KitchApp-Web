@@ -4,4 +4,7 @@ core = 7.x
 package = BuyList
 php = 5.4
 version = "1.0"
+
+dependencies[]= ctools
+
 configure = admin/config/content/buy_list
