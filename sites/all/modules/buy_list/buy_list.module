@@ -96,3 +96,17 @@ function buy_list_extract_products($node) {
 	}
 	return $products;
 }
+
+
+function buy_list_make_item(array(tnombre,tcantidad,ttipo_cant,tcategoria)) {
+
+	$producto_despensa = new stdClass(); /*Se crea el objeto*/
+
+	$producto_despensa->title = tnombre;
+	$producto_despensa->field_cantidad_2 = tcantidad;
+	$producto_despensa->field_cantidad = ttipo_cant;
+	$producto_despensa->field_categor_a = tcategoria; /*Se da valor a los campos*/
+
+
+	return $item; /*Se devuelve el objeto*/
+}
