@@ -106,18 +106,24 @@ function buy_list_insert_products($node) {
 	$cantidad = $p[cantidad];
 	$unidad = $p[unidad];
 	$categoria = $p[categoria];
-	INSERT INTO drupalis_node VALUES (sig_id, sig_id, producto_despensa, es, $nombre, $uid, 1, fecha_creacion, fecha_cambio, 1, 1, 0, 0, 0); 
+	//INSERT INTO drupalis_node VALUES (sig_id, sig_id, producto_despensa, es, $nombre, $uid, 1, fecha_creacion, fecha_cambio, 1, 1, 0, 0, 0); 
+	buy_list_make_item($uid, $nombre, $cantidad, $unidad, $categoria);
   }
 }
 
-function buy_list_make_item(array(tnombre,tcantidad,ttipo_cant,tcategoria)) {
+function buy_list_make_item($user, $title, $cantidad, $unidad, $categoria) {
 
-	$producto_despensa = new stdClass(); /*Se crea el objeto*/
+	//Node creation
+	$producto_despensa = new stdClass();
 
-	$producto_despensa->title = tnombre;
-	$producto_despensa->field_cantidad_2 = tcantidad;
-	$producto_despensa->field_cantidad = ttipo_cant;
-	$producto_despensa->field_categor_a = tcategoria; /*Se da valor a los campos*/
+	//Inserting the node values
+	$producto_despensa->type = "producto_despensa";
+	$producto_despensa->uid = $user;
+	$producto_despensa->title = $title;
+	$producto_despensa->field_cantidad_2 = $cantidad;
+	$producto_despensa->field_cantidad = $unidad;
+	$producto_despensa->field_categor_a = $categoria;
 
-	return $producto_despensa; /*Se devuelve el objeto*/
+	//Node insertion
+	node_save($producto_despensa);
 }
