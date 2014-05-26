@@ -75,6 +75,20 @@ function buylist_admin() {
   return system_settings_form($form);
 }
 
+/**
+ * Implement hook_action_info().
+ */
+function buylist_action_info() {
+  return array(
+    'buylist_lista_action' => array(
+      'type' => 'node',
+      'label' => 'Actualizar despensa',
+      'configurable' => FALSE,
+      'triggers' => array('any'),
+    ),
+  );
+}
+
 function buylist_extract_products($node) {
   if ($node->type == 'lista') {
     $id_list = $node->nid['0']['value'];
