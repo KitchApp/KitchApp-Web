@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Callbacks de administración del módulo buy_list.
+ * Callbacks de administración del módulo buylist.
  */
 
 /**
