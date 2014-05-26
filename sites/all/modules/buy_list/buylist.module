@@ -35,7 +35,7 @@ function buylist_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('buylist_admin'),
     'access arguments' => array('administer Buy List settings'),
-    'file' => 'buylist.admin.inc'
+    'file' => 'buylist.admin.inc',
     'type' => MENU_NORMAL_ITEM,
   );
   return $items;
