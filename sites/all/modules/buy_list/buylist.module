@@ -14,9 +14,9 @@
  * @param arg
  *   Array that holds the current path as returned from arg() function
  */
-function buy_list_help($path, $arg) {
+function buylist_help($path, $arg) {
   switch ($path) {
-    case "admin/help#buy_list":
+    case "admin/help#buylist":
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t("The Buy List module inserts into the user pantry all products os a given list") . '</p>';
@@ -27,15 +27,15 @@ function buy_list_help($path, $arg) {
 /**
 * Implements hook_menu().
 */
-function buy_list_menu() {
+function buylist_menu() {
   $items = array();
-  $items['admin/config/content/buy_list'] = array(
+  $items['admin/config/content/buylist'] = array(
     'title' => t('Configuration of Buy List'),
     'description' => t('Configure the Buy List module'),
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('buy_list_admin'),
+    'page arguments' => array('buylist_admin'),
     'access arguments' => array('administer Buy List settings'),
-    'file' => 'buy_list.admin.inc'
+    'file' => 'buylist.admin.inc'
     'type' => MENU_NORMAL_ITEM,
   );
   return $items;
@@ -44,7 +44,7 @@ function buy_list_menu() {
 /**
 * Implements hook_permission().
 */
-function buy_list_permission() {
+function buylist_permission() {
   return array(
     'administer Buy List settings' => array(
       'title' => t('Administer Buy List configurations'),
@@ -58,14 +58,14 @@ function buy_list_permission() {
 * 
 * Configuration form
 */
-function buy_list_admin() {
+function buylist_admin() {
   $form = array();
  
   //Something to configure
-  $form['buy_list_something'] = array(
+  $form['buylist_something'] = array(
     '#type' => 'textfield',
     '#title' => t('Something'),
-    '#default_value' => variable_get('buy_list_something', ""),
+    '#default_value' => variable_get('buylist_something', ""),
     '#size' => 60,
     '#maxlength' => 250,
     '#description' => t("Something"),
@@ -75,7 +75,7 @@ function buy_list_admin() {
   return system_settings_form($form);
 }
 
-function buy_list_extract_products($node) {
+function buylist_extract_products($node) {
   if ($node->type == 'lista') {
     $id_list = $node->nid['0']['value'];
     $id_list_products = db_fetch_array(db_query("SELECT field_productos_compra_value FROM {drupalis_field_data_field_productos_compra} WHERE entity_id = %d", $id_list));
@@ -100,8 +100,8 @@ function buy_list_extract_products($node) {
 }
 
 
-function buy_list_insert_products($node) {
-  $products = buy_list_extract_products($node);
+function buylist_insert_products($node) {
+  $products = buylist_extract_products($node);
   $uid = $node->uid['0']['value'];
   foreach($products as $p){
 	$nombre = $p[nombre];
@@ -109,11 +109,11 @@ function buy_list_insert_products($node) {
 	$unidad = $p[unidad];
 	$categoria = $p[categoria];
 	//INSERT INTO drupalis_node VALUES (sig_id, sig_id, producto_despensa, es, $nombre, $uid, 1, fecha_creacion, fecha_cambio, 1, 1, 0, 0, 0); 
-	buy_list_make_item($uid, $nombre, $cantidad, $unidad, $categoria);
+	buylist_make_item($uid, $nombre, $cantidad, $unidad, $categoria);
   }
 }
 
-function buy_list_make_item($user, $title, $cantidad, $unidad, $categoria) {
+function buylist_make_item($user, $title, $cantidad, $unidad, $categoria) {
 
 	//Node creation
 	$producto_despensa = new stdClass();
