@@ -18,7 +18,7 @@ $fichero2 = fopen($nombre_fichero2,"a");
 
 while ( ($linea = fgets($fichero)) !== false) {
 
-	$nombre = getSQLResultSet("SELECT entity_id, field_nombre_producto_compra_value FROM 'drupalis_field_data_field_nombre_producto_compra' WHERE entity_id='$linea'");
+	$nombre = getSQLResultSet("SELECT field_nombre_producto_compra_value FROM 'drupalis_field_data_field_nombre_producto_compra' WHERE entity_id='$linea'");
 	
 /*	$nombre = db_query('SELECT field_nombre_producto_compra_value FROM {drupalis_field_data_field_nombre_producto_compra} WHERE entity_id = %d', $linea);
     $cantidad = db_query('SELECT field_cantidad_producto_compra_value FROM {drupalis_field_data_field_cantidad_producto_compra} WHERE entity_id = %d', $linea);
