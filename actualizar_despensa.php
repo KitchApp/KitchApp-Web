@@ -29,7 +29,7 @@ while ( ($linea = fgets($fichero)) !== false) {
 	/*A modo testeo, almacenamos los resultados en otro fichero. Posteriormente, serán añadidos a la despensa*/
 	
 	fwrite($fichero2, $nombre . "\n");
-	
+
 }
 
 /*Cerramos ficheros*/
