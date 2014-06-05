@@ -11,8 +11,7 @@ $fichero = fopen($nombre_fichero,"a");
 
 $nodo =fgets($fichero); //Obtenemos el nid de la lista. 
 
-$nombre_fichero2 ="actualizar_res.txt";
-$fichero2 = fopen($nombre_fichero2,"a");
+$fichero2 = fopen("actualizar_res.txt","a");
 
 /*De cada linea (entity_id), vamos leyendo los campos correspondientes en la tabla*/
 
@@ -21,11 +20,11 @@ while ( ($linea = fgets($fichero)) !== false) {
 /*	$nombre = getSQLResultSet("SELECT field_nombre_producto_compra_value FROM 'drupalis_field_data_field_nombre_producto_compra' WHERE entity_id='$linea'");
 */	
 	//$nombre = db_query('SELECT field_nombre_producto_compra_value FROM {drupalis_field_data_field_nombre_producto_compra} WHERE entity_id = %d', $linea);
-	$nombre = db_select('drupalis_field_data_field_nombre_producto_compra', 'field_nombre_producto_compra_value')
+	$nombre = db_select('drupalis_field_data_field_nombre_producto_compra')
     	->fields('field_nombre_producto_compra_value')
     	->condition('entity_id', $linea,'=')
     	->execute()
-    	->fetchAssoc();
+    	-//>fetchAssoc();
   
 	/*A modo testeo, almacenamos los resultados en otro fichero. Posteriormente, serán añadidos a la despensa*/
 	$n = print_r($nombre, true);
